@@ -144,3 +144,4 @@ elif selected == "Parkinson’s Disease Prediction":
             user_values = [float(value) for value in user_input.values()]
             prediction = parkinsonsdisease_model.predict([user_values])
             st.success("The person has Parkinson’s Disease" if prediction[0] == 1 else "The person does not have Parkinson’s Disease")
+
