@@ -1,5 +1,6 @@
 import os
 import pickle
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 
@@ -48,10 +49,32 @@ if selected == "Diabetes Prediction":
 
 # Heart Disease Prediction Section
 elif selected == "Heart Disease Prediction":
-    fields = {"Age": "", "Sex": "", "CP (Chest Pain Type)": "", "Trestbps (Resting Blood Pressure)": "", "Cholesterol": "", "FBS (Fasting Blood Sugar)": "", "RestECG (Resting ECG)": "", "Thalach (Max Heart Rate)": "", "Exang (Exercise Induced Angina)": "", "Oldpeak": "", "CA (Number of major vessels colored by fluoroscopy)": "", "Thal (Thalassemia type)": ""}
-    descriptions = {"Cholesterol": "Normal: <200 mg/dL", "FBS": "Normal: <100 mg/dL", "Trestbps": "Normal: 120/80 mmHg"}
+    fields = {
+        "Age": "",
+        "Sex (Enter 0 for Female, 1 for Male)": "",
+        "CP (Chest Pain Type)": "",
+        "Trestbps (Resting Blood Pressure)": "",
+        "Chol (Cholesterol Level)": "",
+        "FBS (Fasting Blood Sugar)": "",
+        "RestECG (Resting ECG)": "",
+        "Thalach (Max Heart Rate)": "",
+        "Exang (Exercise Induced Angina)": "",
+        "Oldpeak (ST Depression)": "",
+        "Slope (Slope of Peak Exercise ST Segment)": "",
+        "CA (Number of Major Vessels)": "",
+        "Thal (Thalassemia Type)": ""
+    }
+
+    descriptions = {
+        "Sex": "Enter 0 for Female, 1 for Male",
+        "Chol": "Normal: <200 mg/dL",
+        "FBS": "Normal: <100 mg/dL",
+        "Trestbps": "Normal: 120/80 mmHg",
+        "Oldpeak": "ST depression induced by exercise"
+    }
+
     user_input = layout_section(fields, descriptions)
-    
+
     if st.button("Predict Heart Disease"):
         if any(value.strip() == "" for value in user_input.values()):
             st.error("Error: All input fields must be filled!")
@@ -62,10 +85,58 @@ elif selected == "Heart Disease Prediction":
 
 # Parkinson’s Disease Prediction Section
 elif selected == "Parkinson’s Disease Prediction":
-    fields = {"MDVP:Fo(Hz)": "", "MDVP:Jitter(%)": "", "MDVP:Shimmer": "", "NHR": "", "HNR": "", "RPDE": "", "DFA": "", "Spread1": "", "PPE": ""}
-    descriptions = {"MDVP:Fo(Hz)": "Fundamental Frequency of Voice", "MDVP:Jitter(%)":"Variability in pitch (Jitter)","MDVP:Shimmer":"Variation in amplitude","NHR":"Noise-to-Harmonics Ratio (higher values indicate voice disorders)", "HNR": "Harmonics-to-Noise Ratio (lower values indicate voice disorders)", "RPDE":"Recurrence Period Density Entropy (measures complexity of voice)", "DFA":"Detrended Fluctuation Analysis (measures signal randomness)", "Spread1":"Nonlinear measure of fundamental frequency variation", "PPE": "Pitch Period Entropy"}
+    fields = {
+        "MDVP:Fo(Hz)": "",
+        "MDVP:Fhi(Hz)": "",
+        "MDVP:Flo(Hz)": "",
+        "MDVP:Jitter(%)": "",
+        "MDVP:Jitter(Abs)": "",
+        "MDVP:RAP": "",
+        "MDVP:PPQ": "",
+        "Jitter:DDP": "",
+        "MDVP:Shimmer": "",
+        "MDVP:Shimmer(dB)": "",
+        "Shimmer:APQ3": "",
+        "Shimmer:APQ5": "",
+        "MDVP:APQ": "",
+        "Shimmer:DDA": "",
+        "NHR": "",
+        "HNR": "",
+        "RPDE": "",
+        "DFA": "",
+        "Spread1": "",
+        "Spread2": "",
+        "D2": "",
+        "PPE": ""
+    }
+
+    descriptions = {
+        "MDVP:Fo(Hz)": "Fundamental Frequency of Voice",
+        "MDVP:Fhi(Hz)": "Highest Fundamental Frequency",
+        "MDVP:Flo(Hz)": "Lowest Fundamental Frequency",
+        "MDVP:Jitter(%)": "Variability in pitch (Jitter)",
+        "MDVP:Jitter(Abs)": "Absolute Jitter",
+        "MDVP:RAP": "Relative Amplitude Perturbation",
+        "MDVP:PPQ": "Pitch Period Perturbation Quotient",
+        "Jitter:DDP": "Average absolute difference of differences between consecutive pitch periods",
+        "MDVP:Shimmer": "Variation in amplitude",
+        "MDVP:Shimmer(dB)": "Shimmer in decibels",
+        "Shimmer:APQ3": "Three-point Amplitude Perturbation Quotient",
+        "Shimmer:APQ5": "Five-point Amplitude Perturbation Quotient",
+        "MDVP:APQ": "Amplitude Perturbation Quotient",
+        "Shimmer:DDA": "Average absolute differences of differences between consecutive periods in amplitude",
+        "NHR": "Noise-to-Harmonics Ratio (higher values indicate voice disorders)",
+        "HNR": "Harmonics-to-Noise Ratio (lower values indicate voice disorders)",
+        "RPDE": "Recurrence Period Density Entropy (measures complexity of voice)",
+        "DFA": "Detrended Fluctuation Analysis (measures signal randomness)",
+        "Spread1": "Nonlinear measure of fundamental frequency variation",
+        "Spread2": "Another measure of frequency variation",
+        "D2": "Signal Complexity Measure",
+        "PPE": "Pitch Period Entropy"
+    }
+
     user_input = layout_section(fields, descriptions)
-    
+
     if st.button("Predict Parkinson’s Disease"):
         if any(value.strip() == "" for value in user_input.values()):
             st.error("Error: All input fields must be filled!")
