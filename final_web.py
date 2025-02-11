@@ -7,9 +7,9 @@ from streamlit_option_menu import option_menu
 st.set_page_config(page_title='Prediction of Disease Outbreaks', layout='wide', page_icon='🩺')
 
 # Load models
-diabetes_model = pickle.load(open("Models/final_diabetes_model.sav", 'rb'))
-heartdisease_model = pickle.load(open("Models/final_heart_model.sav", 'rb'))
-parkinsonsdisease_model = pickle.load(open("Models/final_parkinsons_model.sav", 'rb'))
+diabetes_model = pickle.load (open("Models/final_diabetes_model.sav", 'rb'))
+heartdisease_model = pickle.load (open("Models/final_heart_model.sav", 'rb'))
+parkinsonsdisease_model = pickle.load (open("Models/final_parkinsons_model.sav", 'rb'))
 
 # Centered Page Title
 st.markdown("""<h1 style= 'text-align: center;'>Prediction of Disease Outbreak System (using ML) </h1>""", unsafe_allow_html=True)
@@ -45,7 +45,10 @@ if selected == "Diabetes Prediction":
         else:
             user_values = [float(value) for value in user_input.values()]
             prediction = diabetes_model.predict([user_values])
-            st.success("The person is diabetic" if prediction[0] == 1 else "The person is not diabetic")
+            if prediction[0] == 1:
+                st.success("The person is diabetic"  )
+            else: 
+                st.success("The person is not diabetic")
 
 # Heart Disease Prediction Section
 elif selected == "Heart Disease Prediction":
@@ -81,7 +84,10 @@ elif selected == "Heart Disease Prediction":
         else:
             user_values = [float(value) for value in user_input.values()]
             prediction = heartdisease_model.predict([user_values])
-            st.success("The person has heart disease" if prediction[0] == 1 else "The person does not have heart disease")
+            if prediction[0] == 1:
+                st.success("The person has heart disease")  
+            else: 
+                st.success("The person does not have heart disease")
 
 # Parkinson’s Disease Prediction Section
 elif selected == "Parkinson’s Disease Prediction":
@@ -143,5 +149,7 @@ elif selected == "Parkinson’s Disease Prediction":
         else:
             user_values = [float(value) for value in user_input.values()]
             prediction = parkinsonsdisease_model.predict([user_values])
-            st.success("The person has Parkinson’s Disease" if prediction[0] == 1 else "The person does not have Parkinson’s Disease")
-
+            if prediction[0] == 1:
+                st.success("The person has Parkinson’s Disease")  
+            else: 
+                st.success("The person does not have Parkinson’s Disease")
